@@ -34,7 +34,9 @@ public class Weapon : MonoBehaviour
         Pickup newWeapon = other.GetComponent<Pickup>();
         if (newWeapon)
         {
-            GameObject weapon = Instantiate(newWeapon.WeaponPrefab, transform.parent);
+            GameObject weapon = Instantiate(newWeapon.GetWeaponFromPickup(), transform.parent);
+            weapon.name = newWeapon.GetWeaponFromPickup().name;
+            newWeapon.ChangeDisplay(gameObject);
             _owner.ResetWeapon(weapon.GetComponent<Weapon>());
         }
     }
