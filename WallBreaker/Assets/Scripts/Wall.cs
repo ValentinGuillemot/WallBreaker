@@ -10,6 +10,14 @@ public class Wall : MonoBehaviour
     [SerializeField]
     float maxHP = 50.0f;
 
+    [SerializeField]
+    float damageOnDurability = 10.0f;
+
+    public float DurabilityDamage
+    {
+        get { return damageOnDurability; }
+    }
+
     float _currentHP = 0.0f;
 
     // Start is called before the first frame update

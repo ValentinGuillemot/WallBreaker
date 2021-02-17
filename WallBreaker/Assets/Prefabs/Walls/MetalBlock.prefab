@@ -111,6 +111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: a01031bfd49859543aeb9e923961f1c7, type: 2}
   maxHP: 100
+  damageOnDurability: 20
 --- !u!54 &2461504047567577760
 Rigidbody:
   m_ObjectHideFlags: 0

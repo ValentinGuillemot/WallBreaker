@@ -223,6 +223,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   strength: 20
+  speedEffect: 0.9
+  maxDurability: 150
 --- !u!1 &1553664017873286516
 GameObject:
   m_ObjectHideFlags: 0

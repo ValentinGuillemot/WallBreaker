@@ -15,4 +15,20 @@ public class Pickup : MonoBehaviour
         GameObject newPickup = Instantiate(newDisplay, GetComponentsInChildren<Transform>()[1]);
         newPickup.name = newDisplay.name;
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Player player = other.GetComponent<Player>();
+        if (player)
+        {
+            if (!player.HasWeapon())
+            {
+                GameObject weaponModel = GetComponentsInChildren<Transform>()[2].gameObject;
+                GameObject weapon = Instantiate(weaponModel, player.WeaponHandle);
+                weapon.name = weaponModel.name;
+                player.ResetWeapon(weapon.GetComponent<Weapon>());
+                Destroy(gameObject);
+            }
+        }
+    }
 }
