@@ -9,6 +9,13 @@ public class Weapon : MonoBehaviour
 
     bool bIsActivated = false;
 
+    Player _owner;
+
+    private void Start()
+    {
+        _owner = GetComponentInParent<Player>();
+    }
+
     public bool Activate
     {
         get { return bIsActivated; }
@@ -23,5 +30,12 @@ public class Weapon : MonoBehaviour
         Wall target = other.GetComponent<Wall>();
         if (target)
             target.TakeDamage(strength);
+
+        Pickup newWeapon = other.GetComponent<Pickup>();
+        if (newWeapon)
+        {
+            GameObject weapon = Instantiate(newWeapon.WeaponPrefab, transform.parent);
+            _owner.ResetWeapon(weapon.GetComponent<Weapon>());
+        }
     }
 }

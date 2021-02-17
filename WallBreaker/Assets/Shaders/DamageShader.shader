@@ -54,7 +54,7 @@
             // Albedo comes from a texture tinted by color
             fixed4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color;
             fixed4 c2 = tex2D(_BrokenTex, IN.uv_MainTex) * _Color;
-            c = lerp(c2, c, IsPtInsideDisc(float2(0.5, 0.5), destructionRatio, 0.01, IN.uv_MainTex));
+            c = lerp(c2, c, IsPtInsideDisc(float2(0.5, 0.5), destructionRatio / 2.0, 0.01, IN.uv_MainTex));
 
             o.Albedo = c.rgb;
             // Metallic and smoothness come from slider variables

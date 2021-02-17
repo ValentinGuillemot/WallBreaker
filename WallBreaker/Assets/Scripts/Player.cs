@@ -23,6 +23,12 @@ public class Player : MonoBehaviour
         _equippedWeapon = GetComponentInChildren<Weapon>();
     }
 
+    public void ResetWeapon(Weapon newWeapon)
+    {
+        Destroy(_equippedWeapon.gameObject);
+        _equippedWeapon = newWeapon;
+    }
+
     // Update is called once per frame
     void Update()
     {

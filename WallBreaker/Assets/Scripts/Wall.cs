@@ -15,6 +15,8 @@ public class Wall : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        material = new Material(material);
+        GetComponent<MeshRenderer>().material = material;
         _currentHP = maxHP;
         material.SetFloat("destructionRatio", 0.0f);
     }
