@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1553664017579501458}
   - component: {fileID: 1553664017579501457}
   - component: {fileID: 1553664017579501456}
-  - component: {fileID: 1553664017579501459}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -82,19 +81,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1553664017579501459
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1553664017579501453}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1553664017614549526
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,7 +94,7 @@ GameObject:
   - component: {fileID: 1553664017614549525}
   - component: {fileID: 1553664017614549524}
   - component: {fileID: 1553664017614549528}
-  - component: {fileID: 1553664017614549531}
+  - component: {fileID: 2352126557467387919}
   m_Layer: 0
   m_Name: Sword
   m_TagString: Untagged
@@ -210,7 +196,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1553664017614549531
+--- !u!114 &2352126557467387919
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -219,12 +205,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1553664017614549526}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a0c439025831f24f9c54c921c4c9269, type: 3}
+  m_Script: {fileID: 11500000, guid: 87882e3a163920144b46ec2e75ad3400, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   strength: 20
   speedEffect: 0.9
   maxDurability: 150
+  pointsForSpecial: 50
 --- !u!1 &1553664017873286516
 GameObject:
   m_ObjectHideFlags: 0
@@ -236,7 +223,6 @@ GameObject:
   - component: {fileID: 1553664017873286517}
   - component: {fileID: 1553664017873286520}
   - component: {fileID: 1553664017873286523}
-  - component: {fileID: 1553664017873286522}
   m_Layer: 0
   m_Name: Cube (1)
   m_TagString: Untagged
@@ -251,9 +237,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1553664017873286516}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.472, z: -0.02}
-  m_LocalScale: {x: 5, y: 0.06, z: 1}
+  m_LocalScale: {x: 5, y: 0.06, z: 1.1}
   m_Children: []
   m_Father: {fileID: 1553664017614549527}
   m_RootOrder: 1
@@ -307,16 +293,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1553664017873286522
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1553664017873286516}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}

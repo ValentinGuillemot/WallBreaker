@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6676395081090455859}
   - component: {fileID: 6676395081090455858}
   - component: {fileID: 6676395081090455857}
-  - component: {fileID: 6676395081090455854}
+  - component: {fileID: 6896150226320347801}
   m_Layer: 0
   m_Name: Stick
   m_TagString: Untagged
@@ -114,7 +114,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &6676395081090455854
+--- !u!114 &6896150226320347801
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -123,9 +123,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 6676395081090455860}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a0c439025831f24f9c54c921c4c9269, type: 3}
+  m_Script: {fileID: 11500000, guid: f01b259794294874d9e29bdade821393, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  strength: 10
+  strength: 100
   speedEffect: 1
-  maxDurability: 80
+  maxDurability: 800
+  pointsForSpecial: 30
+  nbProjectile: 6
+  specialRadius: 2
+  rotationSpeed: 250
+  timeSpeed: 1
+  projectilePrefab: {fileID: 958812660268585250, guid: f93268f7e626d0b41a0572afd9da10da, type: 3}

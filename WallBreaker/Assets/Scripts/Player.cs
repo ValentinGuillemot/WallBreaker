@@ -54,6 +54,12 @@ public class Player : MonoBehaviour
             StartCoroutine(ResetAttack());
         }
 
+        if (Input.GetMouseButtonDown(1))
+        {
+            if (_equippedWeapon && _equippedWeapon.IsSpecialReady())
+                _equippedWeapon.UseSpecialAttack();
+        }
+
         ComputeMovement();
     }
 

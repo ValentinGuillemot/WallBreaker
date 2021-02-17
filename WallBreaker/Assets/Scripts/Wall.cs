@@ -13,6 +13,9 @@ public class Wall : MonoBehaviour
     [SerializeField]
     float damageOnDurability = 10.0f;
 
+    [SerializeField]
+    float pointsWhenDestroyed = 10.0f;
+
     public float DurabilityDamage
     {
         get { return damageOnDurability; }
@@ -27,6 +30,11 @@ public class Wall : MonoBehaviour
         GetComponent<MeshRenderer>().material = material;
         _currentHP = maxHP;
         material.SetFloat("destructionRatio", 0.0f);
+    }
+
+    public float checkBonus(float damage)
+    {
+        return ( (damage >= _currentHP) ? pointsWhenDestroyed : 0.0f );
     }
 
     public void TakeDamage(float damage)
