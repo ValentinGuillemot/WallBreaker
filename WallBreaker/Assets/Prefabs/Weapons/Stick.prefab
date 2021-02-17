@@ -126,12 +126,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f01b259794294874d9e29bdade821393, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  strength: 100
+  strength: 10
   speedEffect: 1
-  maxDurability: 800
-  pointsForSpecial: 30
+  maxDurability: 80
+  pointsForSpecial: 10
   nbProjectile: 6
   specialRadius: 2
-  rotationSpeed: 250
+  rotationSpeed: 300
   timeSpeed: 1
   projectilePrefab: {fileID: 958812660268585250, guid: f93268f7e626d0b41a0572afd9da10da, type: 3}

@@ -7,6 +7,10 @@ public class DamageZone : MonoBehaviour
     [SerializeField]
     float strength = 1.0f;
 
+    [SerializeField]
+    bool toCamera = true;
+
+    [SerializeField]
     bool pierce = true;
 
     Transform cameraTransform;
@@ -18,7 +22,8 @@ public class DamageZone : MonoBehaviour
 
     private void Update()
     {
-        transform.forward = cameraTransform.forward;
+        if (toCamera)
+            transform.forward = cameraTransform.forward;
     }
 
     private void OnTriggerEnter(Collider other)
