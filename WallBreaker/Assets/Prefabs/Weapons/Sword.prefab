@@ -210,8 +210,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   strength: 20
   speedEffect: 0.9
-  maxDurability: 150
-  pointsForSpecial: 5
+  maxDurability: 300
+  pointsForSpecial: 40
   attackPrefab: {fileID: 8236302250841359608, guid: e8152dfe91bc8e34fb8689998b43248c, type: 3}
   feedbackPrefab: {fileID: 8297456593240498021, guid: 5024e2dd9d3475a4da8ab5d14e5f0d1e, type: 3}
   specialDist: 3

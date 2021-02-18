@@ -128,8 +128,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   strength: 10
   speedEffect: 1
-  maxDurability: 80
-  pointsForSpecial: 10
+  maxDurability: 200
+  pointsForSpecial: 30
   nbProjectile: 6
   specialRadius: 2
   rotationSpeed: 300

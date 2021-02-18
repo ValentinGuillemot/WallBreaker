@@ -27,6 +27,15 @@ public class Player : MonoBehaviour
     Image specialBar;
     float _initSpecialWidth;
 
+    [SerializeField]
+    Image weaponIcon;
+    [SerializeField]
+    Sprite staffIcon;
+    [SerializeField]
+    Sprite swordIcon;
+    [SerializeField]
+    Sprite hammerIcon;
+
     Rigidbody _rb;
     Vector3 _dir;
     Animator _anim;
@@ -49,6 +58,23 @@ public class Player : MonoBehaviour
 
         UpdateDurabilityUI( _equippedWeapon ? _equippedWeapon.GetDurabilityRatio() : 0.0f);
         UpdateSpecialUI( _equippedWeapon ? _equippedWeapon.GetSpecialRatio() : 0.0f);
+
+        Color c = weaponIcon.color;
+        if (!_equippedWeapon)
+        {
+            c.a = 0.0f;
+            weaponIcon.color = c;
+            return;
+        }
+
+        c.a = 1.0f;
+        weaponIcon.color = c;
+        switch (_equippedWeapon.Type)
+        {
+            case Weapon.EWeaponType.Staff: weaponIcon.sprite = staffIcon; break;
+            case Weapon.EWeaponType.Sword: weaponIcon.sprite = swordIcon; break;
+            case Weapon.EWeaponType.Hammer: weaponIcon.sprite = hammerIcon; break;
+        }
     }
 
     public bool HasWeapon()
@@ -70,13 +96,26 @@ public class Player : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
             if (_equippedWeapon && _equippedWeapon.IsSpecialReady())
-                _equippedWeapon.UseSpecialAttack();
+                SpecialAttack();
         }
 
         if (Input.GetKeyDown("space"))
             _rb.AddForce(0.0f, 250.0f, 0.0f);
 
         ComputeMovement();
+    }
+
+    void SpecialAttack()
+    {
+        switch (_equippedWeapon.Type)
+        {
+            case Weapon.EWeaponType.Staff: _anim.SetTrigger("StaffSpecial"); break;
+            case Weapon.EWeaponType.Sword: _anim.SetTrigger("SwordSpecial"); break;
+            case Weapon.EWeaponType.Hammer: _anim.SetTrigger("HammerSpecial"); break;
+        }
+
+        _equippedWeapon.UseSpecialAttack();
+        StartCoroutine(ResetAttack());
     }
 
     IEnumerator ResetAttack()
@@ -91,7 +130,6 @@ public class Player : MonoBehaviour
 
         if (_equippedWeapon)
             _equippedWeapon.Activate = false;
-        _anim.ResetTrigger("Attack");
     }
 
     void ComputeMovement()

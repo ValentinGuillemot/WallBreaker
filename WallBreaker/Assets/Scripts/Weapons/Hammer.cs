@@ -9,16 +9,37 @@ public class Hammer : Weapon
 
     GameObject _damageZone;
 
-   public override void UseSpecialAttack()
+    protected override void Start()
+    {
+        base.Start();
+
+        _type = EWeaponType.Hammer;
+    }
+
+    public override void UseSpecialAttack()
    {
+        StartCoroutine(StartSpecialAttack());
+   }
+
+    public IEnumerator StartSpecialAttack()
+    {
+        bool hasStarted = false;
+
+        if (!hasStarted)
+        {
+            hasStarted = true;
+            yield return new WaitForSeconds(0.5f);
+        }
+
         _bIsUsingSpecial = true;
         _damageZone = Instantiate(damageZonePrefab);
         _damageZone.transform.position = _owner.transform.position;
         _damageZone.transform.rotation = Quaternion.identity;
 
+        _currentPoints = 0.0f;
         _owner.UpdateSpecialUI(0.0f);
         StartCoroutine(DestroyDamage());
-   }
+    }
 
     IEnumerator DestroyDamage()
     {
@@ -32,5 +53,11 @@ public class Hammer : Weapon
 
         Destroy(_damageZone);
         _bIsUsingSpecial = false;
+    }
+
+    protected override void DestroyWeapon()
+    {
+        Destroy(_damageZone);
+        base.DestroyWeapon();
     }
 }

@@ -210,6 +210,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   strength: 40
   speedEffect: 0.5
-  maxDurability: 100
-  pointsForSpecial: 6
+  maxDurability: 250
+  pointsForSpecial: 60
   damageZonePrefab: {fileID: 3436761625197197969, guid: a66c7142cdb15104fa3d0a3d96df2833, type: 3}

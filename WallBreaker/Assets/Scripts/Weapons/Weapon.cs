@@ -4,6 +4,20 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+    public enum EWeaponType
+    {
+        Staff,
+        Sword,
+        Hammer
+    }
+
+    protected EWeaponType _type;
+
+    public EWeaponType Type
+    {
+        get { return _type; }
+    }
+
     [SerializeField]
     protected float strength = 10.0f;
 
@@ -54,7 +68,7 @@ public class Weapon : MonoBehaviour
         transform.localScale = _initLocalScale;
     }
 
-    protected void Start()
+    protected virtual void Start()
     {
         _currentDurability = maxDurability;
         _owner = GetComponentInParent<Player>();
@@ -70,8 +84,13 @@ public class Weapon : MonoBehaviour
         if (_currentDurability <= 0)
         {
             _owner.ChangeWeapon(null);
-            Destroy(gameObject);
+            DestroyWeapon();
         }
+    }
+
+    protected virtual void DestroyWeapon()
+    {
+        Destroy(gameObject);
     }
 
     public bool IsSpecialReady()

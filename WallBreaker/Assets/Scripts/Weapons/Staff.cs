@@ -19,18 +19,38 @@ public class Staff : Weapon
     [SerializeField]
     GameObject projectilePrefab;
 
-    GameObject specialMiddle;
+    GameObject _specialMiddle;
+
+    protected override void Start()
+    {
+        base.Start();
+
+        _type = EWeaponType.Staff;
+    }
 
     public override void UseSpecialAttack()
     {
+        StartCoroutine(StartSpecialAttack());
+    }
+
+    IEnumerator StartSpecialAttack()
+    {
+        bool hasStarted = false;
+
+        if (!hasStarted)
+        {
+            hasStarted = true;
+            yield return new WaitForSeconds(0.75f);
+        }
+
         _bIsUsingSpecial = true;
-        specialMiddle = Instantiate(new GameObject(), _owner.transform);
-        specialMiddle.name = "SpecialAttack";
+        _specialMiddle = Instantiate(new GameObject(), _owner.transform);
+        _specialMiddle.name = "SpecialAttack";
 
         float angleMove = 2 * Mathf.PI / (float)nbProjectile;
         for (float currentAngle = 0.0f; currentAngle < 2 * Mathf.PI; currentAngle += angleMove)
         {
-            GameObject newProjectile = Instantiate(projectilePrefab, specialMiddle.transform);
+            GameObject newProjectile = Instantiate(projectilePrefab, _specialMiddle.transform);
             Vector3 relativePos = new Vector3(Mathf.Cos(currentAngle) * specialRadius, 0.0f, Mathf.Sin(currentAngle) * specialRadius);
             newProjectile.transform.localPosition = relativePos;
         }
@@ -47,11 +67,18 @@ public class Staff : Weapon
                 _currentPoints = 0.0f;
 
             _owner.UpdateSpecialUI(_currentPoints / pointsForSpecial);
-            specialMiddle.transform.rotation *= Quaternion.Euler(0.0f, Time.deltaTime * rotationSpeed, 0.0f);
+            _specialMiddle.transform.rotation *= Quaternion.Euler(0.0f, Time.deltaTime * rotationSpeed, 0.0f);
             yield return new WaitForFixedUpdate();
         }
 
-        Destroy(specialMiddle);
+        Destroy(_specialMiddle);
         _bIsUsingSpecial = false;
+    }
+
+    protected override void DestroyWeapon()
+    {
+        _currentPoints = 0.0f;
+        Destroy(_specialMiddle);
+        base.DestroyWeapon();
     }
 }

@@ -19,8 +19,28 @@ public class Sword : Weapon
     GameObject _slashObject;
     GameObject _slashFeedback;
 
+    protected override void Start()
+    {
+        base.Start();
+
+        _type = EWeaponType.Sword;
+    }
+
     public override void UseSpecialAttack()
     {
+        StartCoroutine(StartSpecialAttack());
+    }
+
+    IEnumerator StartSpecialAttack()
+    {
+        bool hasStarted = false;
+
+        if (!hasStarted)
+        {
+            hasStarted = true;
+            yield return new WaitForSeconds(1.2f);
+        }
+
         _bIsUsingSpecial = true;
         _slashObject = Instantiate(attackPrefab, _owner.transform);
         _slashObject.transform.localPosition = new Vector3(-specialDist, 0.0f, specialDist);
@@ -28,6 +48,7 @@ public class Sword : Weapon
         _slashFeedback = Instantiate(feedbackPrefab, _owner.transform);
         _slashFeedback.transform.localPosition = new Vector3(0.0f, 1.0f, 1.0f);
 
+        _currentPoints = 0.0f;
         _owner.UpdateSpecialUI(0.0f);
         StartCoroutine(MoveSlash());
     }
@@ -44,5 +65,12 @@ public class Sword : Weapon
         Destroy(_slashObject);
         Destroy(_slashFeedback);
         _bIsUsingSpecial = false;
+    }
+
+    protected override void DestroyWeapon()
+    {
+        Destroy(_slashObject);
+        Destroy(_slashFeedback);
+        base.DestroyWeapon();
     }
 }
