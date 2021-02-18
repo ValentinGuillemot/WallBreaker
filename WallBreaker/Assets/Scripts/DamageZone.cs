@@ -13,17 +13,17 @@ public class DamageZone : MonoBehaviour
     [SerializeField]
     bool pierce = true;
 
-    Transform cameraTransform;
+    Transform _cameraTransform;
 
     private void Start()
     {
-        cameraTransform = GameObject.FindObjectOfType<Camera>().transform;
+        _cameraTransform = GameObject.FindObjectOfType<Camera>().transform;
     }
 
     private void Update()
     {
         if (toCamera)
-            transform.forward = cameraTransform.forward;
+            transform.forward = _cameraTransform.forward;
     }
 
     private void OnTriggerEnter(Collider other)

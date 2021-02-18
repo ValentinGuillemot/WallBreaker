@@ -6,6 +6,11 @@ using UnityEngine.AI;
 [CreateAssetMenu(menuName = "State/Stun", order = 5)]
 public class StunState : State
 {
+    [SerializeField]
+    GameObject feedback = null;
+
+    GameObject _instantiatedFeedback = null;
+
     float _timeStunned;
 
     public float TimeStunned
@@ -29,13 +34,18 @@ public class StunState : State
         _ai = ai;
         _ai.GetComponent<NavMeshAgent>().destination = _ai.transform.position;
         _currentTime = _timeStunned;
+
+        _instantiatedFeedback = Instantiate(feedback, _ai.transform);
     }
 
     public override State UpdateState()
     {
         _currentTime -= Time.deltaTime;
         if (_currentTime <= 0.0f)
+        {
+            Destroy(_instantiatedFeedback);
             return _interruptedState;
+        }
 
         return null;
     }
