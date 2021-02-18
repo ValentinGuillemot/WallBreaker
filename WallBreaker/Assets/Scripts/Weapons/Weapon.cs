@@ -22,6 +22,9 @@ public class Weapon : MonoBehaviour
     protected float strength = 10.0f;
 
     [SerializeField]
+    protected float stunPotential = 3.0f;
+
+    [SerializeField]
     protected float speedEffect = 0.9f;
 
     [SerializeField]
@@ -110,6 +113,10 @@ public class Weapon : MonoBehaviour
         Pickup newWeapon = other.GetComponent<Pickup>();
         if (newWeapon && !_bIsUsingSpecial)
             ChangeWeapon(newWeapon);
+
+        Builder enemy = other.GetComponent<Builder>();
+        if (enemy)
+            enemy.Stun(stunPotential);
     }
 
     protected void AttackWall(Wall target)
@@ -137,7 +144,7 @@ public class Weapon : MonoBehaviour
         transform.parent = newWeapon.GetParentForPickup().transform;
         ResetTransform();
     }
-    
+
     public float GetDurabilityRatio()
     {
         return _currentDurability / maxDurability;

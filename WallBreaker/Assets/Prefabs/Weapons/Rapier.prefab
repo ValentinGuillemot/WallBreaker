@@ -290,6 +290,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   strength: 15
+  stunPotential: 5
   speedEffect: 1.2
   maxDurability: 250
   pointsForSpecial: 30
