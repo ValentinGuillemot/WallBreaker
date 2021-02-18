@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     float rotationSpeed = 2.0f;
 
     [SerializeField]
-    Transform weaponHandle;
+    Transform weaponHandle = null;
 
     public Transform WeaponHandle
     {
@@ -20,21 +20,21 @@ public class Player : MonoBehaviour
     }
 
     [SerializeField]
-    Image durabilityBar;
+    Image durabilityBar = null;
     float _initDurabilityWidth;
 
     [SerializeField]
-    Image specialBar;
+    Image specialBar = null;
     float _initSpecialWidth;
 
     [SerializeField]
-    Image weaponIcon;
+    Image weaponIcon = null;
     [SerializeField]
-    Sprite staffIcon;
+    Sprite staffIcon = null;
     [SerializeField]
-    Sprite swordIcon;
+    Sprite swordIcon = null;
     [SerializeField]
-    Sprite hammerIcon;
+    Sprite hammerIcon = null;
 
     Rigidbody _rb;
     Vector3 _dir;

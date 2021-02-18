@@ -5,7 +5,7 @@ using UnityEngine;
 public class Hammer : Weapon
 {
     [SerializeField]
-    GameObject damageZonePrefab;
+    GameObject damageZonePrefab = null;
 
     GameObject _damageZone;
 

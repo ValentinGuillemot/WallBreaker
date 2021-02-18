@@ -5,10 +5,10 @@ using UnityEngine;
 public class Sword : Weapon
 {
     [SerializeField]
-    GameObject attackPrefab;
+    GameObject attackPrefab = null;
 
     [SerializeField]
-    GameObject feedbackPrefab;
+    GameObject feedbackPrefab = null;
 
     [SerializeField]
     float specialDist = 1.0f;
@@ -16,8 +16,8 @@ public class Sword : Weapon
     [SerializeField]
     float specialSpeed = 1.0f;
 
-    GameObject _slashObject;
-    GameObject _slashFeedback;
+    GameObject _slashObject = null;
+    GameObject _slashFeedback = null;
 
     protected override void Start()
     {

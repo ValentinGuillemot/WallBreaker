@@ -40,7 +40,6 @@ public class Wall : MonoBehaviour
     public void TakeDamage(float damage)
     {
         _currentHP -= damage;
-        Debug.Log(_currentHP);
         if (_currentHP <= 0)
             Destroy(gameObject);
 

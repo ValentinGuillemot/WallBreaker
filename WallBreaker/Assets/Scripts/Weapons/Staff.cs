@@ -17,7 +17,7 @@ public class Staff : Weapon
     float timeSpeed = 1.0f;
 
     [SerializeField]
-    GameObject projectilePrefab;
+    GameObject projectilePrefab = null;
 
     GameObject _specialMiddle;
 
