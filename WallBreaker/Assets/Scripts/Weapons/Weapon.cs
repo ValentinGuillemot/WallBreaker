@@ -20,6 +20,12 @@ public class Weapon : MonoBehaviour
 
     protected float _currentPoints = 0.0f;
 
+    protected Vector3 _initLocalPos = Vector3.zero;
+    protected Vector3 _initLocalScale = Vector3.one;
+    protected Quaternion _initLocalRot = Quaternion.identity;
+
+    protected bool _bIsUsingSpecial = false;
+
     public float Speed
     {
         get { return speedEffect; }
@@ -35,10 +41,27 @@ public class Weapon : MonoBehaviour
 
     protected Player _owner;
 
+    public Player Owner
+    {
+        get { return _owner; }
+        set { _owner = value; }
+    }
+
+    public void ResetTransform()
+    {
+        transform.localPosition = _initLocalPos;
+        transform.localRotation = _initLocalRot;
+        transform.localScale = _initLocalScale;
+    }
+
     protected void Start()
     {
         _currentDurability = maxDurability;
         _owner = GetComponentInParent<Player>();
+
+        _initLocalPos = transform.localPosition;
+        _initLocalScale = transform.localScale;
+        _initLocalRot = transform.localRotation;
     }
 
     protected void DamageDurability(float damage)
@@ -46,7 +69,7 @@ public class Weapon : MonoBehaviour
         _currentDurability -= damage;
         if (_currentDurability <= 0)
         {
-            _owner.ResetWeapon(null);
+            _owner.ChangeWeapon(null);
             Destroy(gameObject);
         }
     }
@@ -63,20 +86,47 @@ public class Weapon : MonoBehaviour
 
         Wall target = other.GetComponent<Wall>();
         if (target)
-        {
-            _currentPoints = Mathf.Min(_currentPoints + target.checkBonus(strength), pointsForSpecial);
-            DamageDurability(target.DurabilityDamage);
-            target.TakeDamage(strength);
-        }
+            AttackWall(target);
 
         Pickup newWeapon = other.GetComponent<Pickup>();
-        if (newWeapon)
+        if (newWeapon && !_bIsUsingSpecial)
+            ChangeWeapon(newWeapon);
+    }
+
+    protected void AttackWall(Wall target)
+    {
+        float potentialBonus = target.checkBonus(strength);
+        if (potentialBonus > 0)
         {
-            GameObject weapon = Instantiate(newWeapon.GetWeaponFromPickup(), transform.parent);
-            weapon.name = newWeapon.GetWeaponFromPickup().name;
-            newWeapon.ChangeDisplay(gameObject);
-            _owner.ResetWeapon(weapon.GetComponent<Weapon>());
+            _currentPoints = Mathf.Min(_currentPoints + target.checkBonus(strength), pointsForSpecial);
+            _owner.UpdateSpecialUI(_currentPoints / pointsForSpecial);
         }
+        DamageDurability(target.DurabilityDamage);
+        _owner.UpdateDurabilityUI(_currentDurability / maxDurability);
+        target.TakeDamage(strength);
+    }
+
+    protected void ChangeWeapon(Pickup newWeapon)
+    {
+        GameObject equippedObject = newWeapon.GivePickupToTransform(transform.parent);
+        Weapon equippedWeapon = equippedObject.GetComponent<Weapon>();
+        _owner.ChangeWeapon(equippedWeapon);
+        equippedWeapon.Owner = _owner;
+        equippedWeapon.ResetTransform();
+        _owner = null;
+
+        transform.parent = newWeapon.GetParentForPickup().transform;
+        ResetTransform();
+    }
+    
+    public float GetDurabilityRatio()
+    {
+        return _currentDurability / maxDurability;
+    }
+
+    public float GetSpecialRatio()
+    {
+        return _currentPoints / pointsForSpecial;
     }
 
     public virtual void UseSpecialAttack()

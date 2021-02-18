@@ -21,11 +21,14 @@ public class Sword : Weapon
 
     public override void UseSpecialAttack()
     {
+        _bIsUsingSpecial = true;
         _slashObject = Instantiate(attackPrefab, _owner.transform);
         _slashObject.transform.localPosition = new Vector3(-specialDist, 0.0f, specialDist);
 
         _slashFeedback = Instantiate(feedbackPrefab, _owner.transform);
         _slashFeedback.transform.localPosition = new Vector3(0.0f, 1.0f, 1.0f);
+
+        _owner.UpdateSpecialUI(0.0f);
         StartCoroutine(MoveSlash());
     }
 
@@ -40,5 +43,6 @@ public class Sword : Weapon
 
         Destroy(_slashObject);
         Destroy(_slashFeedback);
+        _bIsUsingSpecial = false;
     }
 }

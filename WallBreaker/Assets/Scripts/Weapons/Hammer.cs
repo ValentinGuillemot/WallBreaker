@@ -11,10 +11,12 @@ public class Hammer : Weapon
 
    public override void UseSpecialAttack()
    {
+        _bIsUsingSpecial = true;
         _damageZone = Instantiate(damageZonePrefab);
         _damageZone.transform.position = _owner.transform.position;
         _damageZone.transform.rotation = Quaternion.identity;
 
+        _owner.UpdateSpecialUI(0.0f);
         StartCoroutine(DestroyDamage());
    }
 
@@ -29,5 +31,6 @@ public class Hammer : Weapon
         }
 
         Destroy(_damageZone);
+        _bIsUsingSpecial = false;
     }
 }

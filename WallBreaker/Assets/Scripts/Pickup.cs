@@ -4,9 +4,16 @@ using UnityEngine;
 
 public class Pickup : MonoBehaviour
 {
-    public GameObject GetWeaponFromPickup()
+    public GameObject GetParentForPickup()
     {
-        return GetComponentsInChildren<Transform>()[2].gameObject;
+        return GetComponentsInChildren<Transform>()[1].gameObject;
+    }
+
+    public GameObject GivePickupToTransform(Transform newOwner)
+    {
+        GameObject weapon = GetComponentsInChildren<Transform>()[2].gameObject;
+        weapon.transform.parent = newOwner;
+        return weapon;
     }
 
     public void ChangeDisplay(GameObject newDisplay)
@@ -23,10 +30,11 @@ public class Pickup : MonoBehaviour
         {
             if (!player.HasWeapon())
             {
-                GameObject weaponModel = GetComponentsInChildren<Transform>()[2].gameObject;
-                GameObject weapon = Instantiate(weaponModel, player.WeaponHandle);
-                weapon.name = weaponModel.name;
-                player.ResetWeapon(weapon.GetComponent<Weapon>());
+                GameObject weapon = GetComponentsInChildren<Transform>()[2].gameObject;
+                weapon.transform.parent = player.WeaponHandle;
+                weapon.GetComponent<Weapon>().ResetTransform();
+                weapon.GetComponent<Weapon>().Owner = player;
+                player.ChangeWeapon(weapon.GetComponent<Weapon>());
                 Destroy(gameObject);
             }
         }

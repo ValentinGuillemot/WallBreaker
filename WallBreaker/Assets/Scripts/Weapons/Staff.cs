@@ -19,12 +19,11 @@ public class Staff : Weapon
     [SerializeField]
     GameObject projectilePrefab;
 
-    bool _bIsUsingSpecial = false;
-
     GameObject specialMiddle;
 
     public override void UseSpecialAttack()
     {
+        _bIsUsingSpecial = true;
         specialMiddle = Instantiate(new GameObject(), _owner.transform);
         specialMiddle.name = "SpecialAttack";
 
@@ -47,10 +46,12 @@ public class Staff : Weapon
             if (_currentPoints < 0.0f)
                 _currentPoints = 0.0f;
 
+            _owner.UpdateSpecialUI(_currentPoints / pointsForSpecial);
             specialMiddle.transform.rotation *= Quaternion.Euler(0.0f, Time.deltaTime * rotationSpeed, 0.0f);
             yield return new WaitForFixedUpdate();
         }
 
         Destroy(specialMiddle);
+        _bIsUsingSpecial = false;
     }
 }

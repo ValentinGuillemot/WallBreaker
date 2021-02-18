@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -18,6 +19,14 @@ public class Player : MonoBehaviour
         get { return weaponHandle; }
     }
 
+    [SerializeField]
+    Image durabilityBar;
+    float _initDurabilityWidth;
+
+    [SerializeField]
+    Image specialBar;
+    float _initSpecialWidth;
+
     Rigidbody _rb;
     Vector3 _dir;
     Animator _anim;
@@ -29,13 +38,17 @@ public class Player : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
         _anim = GetComponent<Animator>();
         _equippedWeapon = GetComponentInChildren<Weapon>();
+
+        _initDurabilityWidth = 300;
+        _initSpecialWidth = 200;
     }
 
-    public void ResetWeapon(Weapon newWeapon)
+    public void ChangeWeapon(Weapon newWeapon)
     {
-        if (_equippedWeapon)
-            Destroy(_equippedWeapon.gameObject);
         _equippedWeapon = newWeapon;
+
+        UpdateDurabilityUI( _equippedWeapon ? _equippedWeapon.GetDurabilityRatio() : 0.0f);
+        UpdateSpecialUI( _equippedWeapon ? _equippedWeapon.GetSpecialRatio() : 0.0f);
     }
 
     public bool HasWeapon()
@@ -59,6 +72,9 @@ public class Player : MonoBehaviour
             if (_equippedWeapon && _equippedWeapon.IsSpecialReady())
                 _equippedWeapon.UseSpecialAttack();
         }
+
+        if (Input.GetKeyDown("space"))
+            _rb.AddForce(0.0f, 250.0f, 0.0f);
 
         ComputeMovement();
     }
@@ -90,7 +106,7 @@ public class Player : MonoBehaviour
         float z = Input.GetAxis("Vertical");
         Vector3 moveZ = new Vector3(0, 0.0f, z);
         moveZ = transform.rotation * moveZ;
-        _rb.velocity = (moveZ * 1000.0f * Time.deltaTime * movingSpeed);
+        _rb.velocity = (moveZ * 1000.0f * Time.deltaTime * movingSpeed) + new Vector3(0.0f, _rb.velocity.y, 0.0f);
     }
 
     void ComputeRotation()
@@ -108,5 +124,17 @@ public class Player : MonoBehaviour
 
         Quaternion rotate = Quaternion.FromToRotation(transform.forward, _dir);
         _rb.rotation = Quaternion.Slerp(transform.rotation, transform.rotation * rotate, Time.deltaTime * rotationSpeed);
+    }
+
+    public void UpdateDurabilityUI(float ratio)
+    {
+        float y = durabilityBar.rectTransform.sizeDelta.y;
+        durabilityBar.rectTransform.sizeDelta = new Vector2(ratio * _initDurabilityWidth, y);
+    }
+
+    public void UpdateSpecialUI(float ratio)
+    {
+        float y = specialBar.rectTransform.sizeDelta.y;
+        specialBar.rectTransform.sizeDelta = new Vector2(ratio * _initSpecialWidth, y);
     }
 }
