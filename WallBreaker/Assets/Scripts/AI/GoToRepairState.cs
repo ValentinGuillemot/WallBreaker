@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-[CreateAssetMenu(menuName = "State/GoToRepare", order = 2)]
-public class GoToRepareState : State
+[CreateAssetMenu(menuName = "State/GoToRepair", order = 2)]
+public class GoToRepairState : State
 {
     [SerializeField]
-    RepareState repareState = null;
+    RepairState repairState = null;
 
     [SerializeField]
     float speed = 3.5f;
@@ -38,8 +38,8 @@ public class GoToRepareState : State
     {
         if (_navigator.remainingDistance <= stoppingDistance)
         {
-            repareState.BlockPos = _blockPos;
-            return repareState;
+            repairState.BlockPos = _blockPos;
+            return repairState;
         }
         
         return null;

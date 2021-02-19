@@ -6,9 +6,32 @@ using UnityEngine;
 public class AnalyzeState : State
 {
     [SerializeField]
-    GoToRepareState stateIfFind = null;
+    GoToRepairState stateIfFind = null;
+
+    [SerializeField]
+    float timeBetweenChecks = 3.0f;
+
+    float _currentTime;
+
+    public override void InitState(Builder ai)
+    {
+        _ai = ai;
+        _currentTime = timeBetweenChecks;
+    }
 
     public override State UpdateState()
+    {
+        _currentTime -= Time.deltaTime;
+        if (_currentTime <= 0.0f)
+        {
+            _currentTime = timeBetweenChecks;
+            return Analyze();
+        }
+
+        return null;
+    }
+
+    State Analyze()
     {
         List<Vector3> positions = _ai.PositionsToCheck;
         Vector3 middle = _ai.transform.position;

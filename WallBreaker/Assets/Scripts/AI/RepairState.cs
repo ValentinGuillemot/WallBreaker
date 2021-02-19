@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "State/Repare", order = 3)]
-public class RepareState : State
+[CreateAssetMenu(menuName = "State/Repair", order = 3)]
+public class RepairState : State
 {
     [SerializeField]
     MoveToState doneWithRepare = null;

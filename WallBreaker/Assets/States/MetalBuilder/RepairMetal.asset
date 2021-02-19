@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 82dde81a717041a438b945b1801908b2, type: 3}
-  m_Name: RepareBrick
+  m_Name: RepairMetal
   m_EditorClassIdentifier: 
-  doneWithRepare: {fileID: 11400000, guid: cbbce8481a255cd4398e2d542f27488f, type: 2}
-  timeToRepare: 5
-  wallPrefab: {fileID: 2654854155782982768, guid: 49bc8c9d3f249434da1fab8491b9f873, type: 3}
+  doneWithRepare: {fileID: 11400000, guid: f67c3da4debb2184d9638795ae002e80, type: 2}
+  timeToRepare: 10
+  wallPrefab: {fileID: 2461504047567577790, guid: 28eefa96d0dc0f14f9c3d535a3629f51, type: 3}

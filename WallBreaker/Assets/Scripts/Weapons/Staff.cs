@@ -30,6 +30,10 @@ public class Staff : Weapon
 
     public override void UseSpecialAttack()
     {
+        if (_bIsUsingSpecial)
+            return;
+
+        _bIsUsingSpecial = true;
         StartCoroutine(StartSpecialAttack());
     }
 
@@ -43,7 +47,6 @@ public class Staff : Weapon
             yield return new WaitForSeconds(0.75f);
         }
 
-        _bIsUsingSpecial = true;
         _specialMiddle = Instantiate(new GameObject(), _owner.transform);
         _specialMiddle.name = "SpecialAttack";
 

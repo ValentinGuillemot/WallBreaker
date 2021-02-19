@@ -37,9 +37,11 @@ public class Weapon : MonoBehaviour
 
     protected float _currentPoints = 0.0f;
 
+    #region storedTransform
     protected Vector3 _initLocalPos = Vector3.zero;
     protected Vector3 _initLocalScale = Vector3.one;
     protected Quaternion _initLocalRot = Quaternion.identity;
+    #endregion
 
     protected bool _bIsUsingSpecial = false;
 
@@ -98,7 +100,7 @@ public class Weapon : MonoBehaviour
 
     public bool IsSpecialReady()
     {
-        return _currentPoints == pointsForSpecial;
+        return (_currentPoints == pointsForSpecial && !_bIsUsingSpecial);
     }
 
     protected void OnTriggerEnter(Collider other)
@@ -143,6 +145,7 @@ public class Weapon : MonoBehaviour
 
         transform.parent = newWeapon.GetParentForPickup().transform;
         ResetTransform();
+        _bIsActivated = false;
     }
 
     public float GetDurabilityRatio()

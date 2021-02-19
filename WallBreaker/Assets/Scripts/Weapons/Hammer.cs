@@ -18,6 +18,10 @@ public class Hammer : Weapon
 
     public override void UseSpecialAttack()
    {
+        if (_bIsUsingSpecial)
+            return;
+
+        _bIsUsingSpecial = true;
         StartCoroutine(StartSpecialAttack());
    }
 
@@ -31,7 +35,6 @@ public class Hammer : Weapon
             yield return new WaitForSeconds(0.5f);
         }
 
-        _bIsUsingSpecial = true;
         _damageZone = Instantiate(damageZonePrefab);
         _damageZone.transform.position = _owner.transform.position;
         _damageZone.transform.rotation = Quaternion.identity;

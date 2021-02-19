@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cc5c01ee4db05b14487032f17a9d7ee0, type: 3}
-  m_Name: GoToRepare
+  m_Name: GoToRepair
   m_EditorClassIdentifier: 
-  repareState: {fileID: 11400000, guid: f557b46e7f453714183bfe519728a2ac, type: 2}
+  repairState: {fileID: 11400000, guid: f557b46e7f453714183bfe519728a2ac, type: 2}
   speed: 3.5
   stoppingDistance: 3

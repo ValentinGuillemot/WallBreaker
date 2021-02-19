@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
         get { return weaponHandle; }
     }
 
+    #region UI
     [SerializeField]
     Image durabilityBar = null;
     float _initDurabilityWidth;
@@ -35,6 +36,7 @@ public class Player : MonoBehaviour
     Sprite swordIcon = null;
     [SerializeField]
     Sprite hammerIcon = null;
+    #endregion
 
     Rigidbody _rb;
     Vector3 _dir;
@@ -85,6 +87,9 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown("escape"))
+            Application.Quit();
+
         if (Input.GetMouseButtonDown(0))
         {
             if (_equippedWeapon)
@@ -144,7 +149,7 @@ public class Player : MonoBehaviour
         float z = Input.GetAxis("Vertical");
         Vector3 moveZ = new Vector3(0, 0.0f, z);
         moveZ = transform.rotation * moveZ;
-        _rb.velocity = (moveZ * 1000.0f * Time.deltaTime * movingSpeed) + new Vector3(0.0f, _rb.velocity.y, 0.0f);
+        _rb.velocity = (moveZ * 10.0f * movingSpeed) + new Vector3(0.0f, _rb.velocity.y, 0.0f);
     }
 
     void ComputeRotation()
@@ -161,7 +166,7 @@ public class Player : MonoBehaviour
         }
 
         Quaternion rotate = Quaternion.FromToRotation(transform.forward, _dir);
-        _rb.rotation = Quaternion.Slerp(transform.rotation, transform.rotation * rotate, Time.deltaTime * rotationSpeed);
+        _rb.rotation = Quaternion.Slerp(transform.rotation, transform.rotation * rotate, 0.005f * rotationSpeed);
     }
 
     public void UpdateDurabilityUI(float ratio)

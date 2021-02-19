@@ -28,6 +28,10 @@ public class Sword : Weapon
 
     public override void UseSpecialAttack()
     {
+        if (_bIsUsingSpecial)
+            return;
+
+        _bIsUsingSpecial = true;
         StartCoroutine(StartSpecialAttack());
     }
 
@@ -41,7 +45,6 @@ public class Sword : Weapon
             yield return new WaitForSeconds(1.2f);
         }
 
-        _bIsUsingSpecial = true;
         _slashObject = Instantiate(attackPrefab, _owner.transform);
         _slashObject.transform.localPosition = new Vector3(-specialDist, 0.0f, specialDist);
 
